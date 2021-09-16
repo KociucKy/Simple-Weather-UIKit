@@ -42,6 +42,9 @@
                                     </backgroundConfiguration>
                                     <color key="baseForegroundColor" name="SecondaryColor"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="airPollutionStatusPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="X7A-OE-p47"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="oIA-QR-fgz">
                                 <rect key="frame" x="8" y="484.5" width="398" height="48"/>
@@ -173,6 +176,9 @@
                                             <imageReference key="image" image="safari.fill" catalog="system"/>
                                             <color key="baseForegroundColor" name="PrimaryColor"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="localizeMePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Xex-lG-78J"/>
+                                        </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Find a location" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sip-H0-K2M">
                                         <rect key="frame" x="60" y="0.0" width="338" height="34"/>
@@ -213,6 +219,17 @@
                             <constraint firstAttribute="bottom" secondItem="pac-aY-IEq" secondAttribute="bottom" id="x0x-VV-Xss"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="airPollutionButton" destination="ZEm-TE-1Up" id="soj-DX-NMq"/>
+                        <outlet property="cityLabel" destination="jlU-43-HoV" id="YXQ-lF-OOa"/>
+                        <outlet property="forecastCollectionView" destination="xSV-w2-FTn" id="ZSc-uy-AkH"/>
+                        <outlet property="humidityLabel" destination="czt-9g-bII" id="0v6-Z2-MuW"/>
+                        <outlet property="localizationTextField" destination="sip-H0-K2M" id="ct6-hy-LA1"/>
+                        <outlet property="temperatureLabel" destination="oHa-dJ-NZw" id="Wru-Xp-YDh"/>
+                        <outlet property="weatherImage" destination="dcz-Qd-UFm" id="k7A-ZY-42u"/>
+                        <outlet property="weatherLabel" destination="fXY-ea-lPy" id="mer-WU-AJv"/>
+                        <outlet property="windLabel" destination="Vvx-j6-gUA" id="dev-pm-aIN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
