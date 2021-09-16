@@ -1,4 +1,4 @@
 import UIKit
 
-class ForecastCell: UITableViewCell {
+class ForecastCell: UICollectionViewCell {
 }

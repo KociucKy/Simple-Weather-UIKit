@@ -1,35 +1,24 @@
 import UIKit
 
 class WeatherVC: UIViewController {
-    @IBOutlet weak var forecastTableView: UITableView!
+    @IBOutlet weak var forecastCollectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        forecastTableView.dataSource = self
-        forecastTableView.delegate = self
+//        forecastCollectionView.dataSource = self
     }
 }
 
-//MARK: - UITableView DataSource Methods
-extension WeatherVC: UITableViewDataSource{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.backgroundColor = UIColor.white
-        return cell
-    }
-}
-
-//MARK: - UITableView Delegate Methods
-extension WeatherVC: UITableViewDelegate{
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 7
-    }
-    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return CGFloat(150)
+//MARK: - UICollectionView DataSource Methods
+//extension WeatherVC: UICollectionViewDataSource{
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return 7
 //    }
-}
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = UICollectionViewCell()
+//        cell.backgroundColor = UIColor.white
+//        return cell
+//    }
+//}
+
