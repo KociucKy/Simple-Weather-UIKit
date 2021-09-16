@@ -12,6 +12,9 @@ class WeatherVC: UIViewController {
     @IBOutlet weak var airPollutionButton: UIButton!
     @IBOutlet weak var forecastCollectionView: UICollectionView!
     
+    //MARK: - Properties
+    var apiCaller = APICaller()
+    
     //MARK: - VC Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,6 +80,7 @@ extension WeatherVC: UITextFieldDelegate{
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let city = localizationTextField.text{
             print("Hey sir, I got a city. It is \(city)")
+            apiCaller.createURLString(city: city)
         }
         localizationTextField.text = ""
     }

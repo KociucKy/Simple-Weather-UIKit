@@ -17,6 +17,8 @@
 		88C17F8626F32D73002E421B /* AirPollutionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C17F8526F32D73002E421B /* AirPollutionVC.swift */; };
 		88C17F8826F32D98002E421B /* ForecastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C17F8726F32D98002E421B /* ForecastCell.swift */; };
 		88C17F8A26F32DAC002E421B /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C17F8926F32DAC002E421B /* APICaller.swift */; };
+		88C17F8C26F3529F002E421B /* CurrentWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C17F8B26F3529F002E421B /* CurrentWeatherData.swift */; };
+		88C17F8E26F3549F002E421B /* CurrentWeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C17F8D26F3549F002E421B /* CurrentWeatherModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		88C17F8526F32D73002E421B /* AirPollutionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirPollutionVC.swift; sourceTree = "<group>"; };
 		88C17F8726F32D98002E421B /* ForecastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastCell.swift; sourceTree = "<group>"; };
 		88C17F8926F32DAC002E421B /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
+		88C17F8B26F3529F002E421B /* CurrentWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherData.swift; sourceTree = "<group>"; };
+		88C17F8D26F3549F002E421B /* CurrentWeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,8 @@
 			isa = PBXGroup;
 			children = (
 				88C17F8926F32DAC002E421B /* APICaller.swift */,
+				88C17F8B26F3529F002E421B /* CurrentWeatherData.swift */,
+				88C17F8D26F3549F002E421B /* CurrentWeatherModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -191,11 +197,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88C17F8E26F3549F002E421B /* CurrentWeatherModel.swift in Sources */,
 				88C17F8826F32D98002E421B /* ForecastCell.swift in Sources */,
 				88C17F8A26F32DAC002E421B /* APICaller.swift in Sources */,
 				88C17F6F26F32BF7002E421B /* WeatherVC.swift in Sources */,
 				88C17F6B26F32BF7002E421B /* AppDelegate.swift in Sources */,
 				88C17F8626F32D73002E421B /* AirPollutionVC.swift in Sources */,
+				88C17F8C26F3529F002E421B /* CurrentWeatherData.swift in Sources */,
 				88C17F6D26F32BF7002E421B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

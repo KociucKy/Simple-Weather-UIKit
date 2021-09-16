@@ -186,7 +186,7 @@
                                         <color key="tintColor" name="TextFieldColor"/>
                                         <color key="textColor" name="PrimaryColor"/>
                                         <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                     </textField>
                                 </subviews>
                             </stackView>
