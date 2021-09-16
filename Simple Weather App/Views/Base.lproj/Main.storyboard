@@ -3,6 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19134"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -15,13 +16,33 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pac-aY-IEq">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <imageReference key="image" image="BackgroundImage"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="HCf-7y-nZs">
+                                <rect key="frame" x="0.0" y="474" width="375" height="173"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="pac-aY-IEq" secondAttribute="trailing" id="3IN-ku-PnA"/>
+                            <constraint firstItem="pac-aY-IEq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="6D8-mY-4Xw"/>
+                            <constraint firstAttribute="bottom" secondItem="pac-aY-IEq" secondAttribute="bottom" id="Bf6-RQ-SmV"/>
+                            <constraint firstItem="pac-aY-IEq" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="yJY-9H-HVJ"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="forecastTableView" destination="HCf-7y-nZs" id="QuG-0v-UrL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="117"/>
+            <point key="canvasLocation" x="132" y="116.49175412293854"/>
         </scene>
         <!--Air PollutionVC-->
         <scene sceneID="F0H-kl-o9j">
@@ -40,6 +61,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="BackgroundImage" width="390" height="844"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
