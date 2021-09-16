@@ -19,6 +19,7 @@ class WeatherVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         localizationTextField.delegate = self
+        apiCaller.delegate = self
         imageShadow(weatherImage)
         buttonShadow(airPollutionButton)
     }
@@ -83,6 +84,24 @@ extension WeatherVC: UITextFieldDelegate{
             apiCaller.createURLString(city: city)
         }
         localizationTextField.text = ""
+    }
+}
+
+//MARK: - APICaller Delegate Methods
+extension WeatherVC: APICallerDelegate{
+    func didFinishWithError(error: Error) {
+        print(error.localizedDescription)
+    }
+    
+    func didGetCurrentWeather(_ apiCaller: APICaller, model: CurrentWeatherModel) {
+        DispatchQueue.main.async {
+            self.cityLabel.text = model.cityName
+            self.weatherImage.image = UIImage(systemName: model.conditionName)
+            self.temperatureLabel.text = "\(model.temperatureString)°C"
+            self.weatherLabel.text = model.description
+            self.windLabel.text = "\(model.windString) km/h"
+            self.humidityLabel.text = "\(model.humidityString)%"
+        }
     }
 }
 
