@@ -1,4 +1,5 @@
 import UIKit
+import CoreLocation
 
 class WeatherVC: UIViewController {
     //MARK: - Outlets
@@ -14,12 +15,17 @@ class WeatherVC: UIViewController {
     
     //MARK: - Properties
     var apiCaller = APICaller()
+    var locationManager = CLLocationManager()
     
     //MARK: - VC Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         localizationTextField.delegate = self
         apiCaller.delegate = self
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
+        
         imageShadow(weatherImage)
         buttonShadow(airPollutionButton)
     }
@@ -29,6 +35,7 @@ class WeatherVC: UIViewController {
     }
     
     @IBAction func localizeMePressed(_ sender: Any) {
+        locationManager.requestLocation()
     }
     
     //MARK: - Methods
@@ -80,7 +87,6 @@ extension WeatherVC: UITextFieldDelegate{
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let city = localizationTextField.text{
-            print("Hey sir, I got a city. It is \(city)")
             apiCaller.createURLString(city: city)
         }
         localizationTextField.text = ""
@@ -102,6 +108,22 @@ extension WeatherVC: APICallerDelegate{
             self.windLabel.text = "\(model.windString) km/h"
             self.humidityLabel.text = "\(model.humidityString)%"
         }
+    }
+}
+
+//MARK: - CLLocationManager Delegate Methods
+extension WeatherVC: CLLocationManagerDelegate{
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last{
+            locationManager.stopUpdatingLocation()
+            let lat = location.coordinate.latitude
+            let lon = location.coordinate.longitude
+            apiCaller.createURLString(longitude: lon, latitude: lat)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error.localizedDescription)
     }
 }
 

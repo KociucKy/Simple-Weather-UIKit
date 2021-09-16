@@ -1,4 +1,5 @@
 import Foundation
+import CoreLocation
 
 protocol APICallerDelegate{
     func didFinishWithError(error: Error)
@@ -7,13 +8,17 @@ protocol APICallerDelegate{
 
 struct APICaller{
     //MARK: - Properties
-    let baseURL = "https://api.openweathermap.org/data/2.5/weather?appid=359d8c826618ad811f70758d3cdf64c1&units=metric&q="
+    let baseURL = "https://api.openweathermap.org/data/2.5/weather?appid=359d8c826618ad811f70758d3cdf64c1&units=metric"
     var delegate: APICallerDelegate?
     
     //MARK: - Methods
     func createURLString(city: String){
-        let URLString = baseURL + city
-        print(URLString)
+        let URLString = "\(baseURL)&q=\(city)"
+        fetchCurrentWeatherData(URLString: URLString)
+    }
+    
+    func createURLString(longitude: CLLocationDegrees, latitude: CLLocationDegrees){
+        let URLString = "\(baseURL)&lat=\(latitude)&lon=\(longitude)"
         fetchCurrentWeatherData(URLString: URLString)
     }
     
