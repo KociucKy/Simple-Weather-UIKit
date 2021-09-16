@@ -13,6 +13,7 @@
 		88C17F7226F32BF7002E421B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88C17F7026F32BF7002E421B /* Main.storyboard */; };
 		88C17F7426F32BF9002E421B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88C17F7326F32BF9002E421B /* Assets.xcassets */; };
 		88C17F7726F32BF9002E421B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88C17F7526F32BF9002E421B /* LaunchScreen.storyboard */; };
+		88C17F8426F32CEC002E421B /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 88C17F8326F32CEB002E421B /* Fonts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		88C17F7326F32BF9002E421B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		88C17F7626F32BF9002E421B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		88C17F7826F32BF9002E421B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88C17F8326F32CEB002E421B /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +58,56 @@
 		88C17F6926F32BF7002E421B /* Simple Weather App */ = {
 			isa = PBXGroup;
 			children = (
-				88C17F6A26F32BF7002E421B /* AppDelegate.swift */,
-				88C17F6C26F32BF7002E421B /* SceneDelegate.swift */,
-				88C17F6E26F32BF7002E421B /* ViewController.swift */,
-				88C17F7026F32BF7002E421B /* Main.storyboard */,
-				88C17F7326F32BF9002E421B /* Assets.xcassets */,
-				88C17F7526F32BF9002E421B /* LaunchScreen.storyboard */,
-				88C17F7826F32BF9002E421B /* Info.plist */,
+				88C17F8226F32C94002E421B /* AppDelegate */,
+				88C17F8126F32C90002E421B /* Models */,
+				88C17F8026F32C8C002E421B /* Views */,
+				88C17F7F26F32C86002E421B /* Controllers */,
+				88C17F7E26F32C81002E421B /* Resources */,
 			);
 			path = "Simple Weather App";
+			sourceTree = "<group>";
+		};
+		88C17F7E26F32C81002E421B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				88C17F8326F32CEB002E421B /* Fonts */,
+				88C17F7326F32BF9002E421B /* Assets.xcassets */,
+				88C17F7826F32BF9002E421B /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		88C17F7F26F32C86002E421B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				88C17F6E26F32BF7002E421B /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		88C17F8026F32C8C002E421B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				88C17F7026F32BF7002E421B /* Main.storyboard */,
+				88C17F7526F32BF9002E421B /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		88C17F8126F32C90002E421B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		88C17F8226F32C94002E421B /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				88C17F6A26F32BF7002E421B /* AppDelegate.swift */,
+				88C17F6C26F32BF7002E421B /* SceneDelegate.swift */,
+			);
+			path = AppDelegate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -128,6 +171,7 @@
 				88C17F7726F32BF9002E421B /* LaunchScreen.storyboard in Resources */,
 				88C17F7426F32BF9002E421B /* Assets.xcassets in Resources */,
 				88C17F7226F32BF7002E421B /* Main.storyboard in Resources */,
+				88C17F8426F32CEC002E421B /* Fonts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,7 +335,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8Y8FFN6N8G;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Simple Weather App/Info.plist";
+				INFOPLIST_FILE = "Simple Weather App/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -319,7 +363,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8Y8FFN6N8G;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Simple Weather App/Info.plist";
+				INFOPLIST_FILE = "Simple Weather App/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
