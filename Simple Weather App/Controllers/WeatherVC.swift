@@ -14,14 +14,12 @@ class WeatherVC: UIViewController {
     @IBOutlet weak var forecastCollectionView: UICollectionView!
     
     //MARK: - Properties
-    var apiCaller = APICaller()
     var locationManager = CLLocationManager()
     
     //MARK: - VC Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         localizationTextField.delegate = self
-        apiCaller.delegate = self
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
@@ -87,29 +85,11 @@ extension WeatherVC: UITextFieldDelegate{
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let city = localizationTextField.text{
-            apiCaller.createURLString(city: city)
         }
         localizationTextField.text = ""
     }
 }
 
-//MARK: - APICaller Delegate Methods
-extension WeatherVC: APICallerDelegate{
-    func didFinishWithError(error: Error) {
-        print(error.localizedDescription)
-    }
-    
-    func didGetCurrentWeather(_ apiCaller: APICaller, model: CurrentWeatherModel) {
-        DispatchQueue.main.async {
-            self.cityLabel.text = model.cityName
-            self.weatherImage.image = UIImage(systemName: model.conditionName)
-            self.temperatureLabel.text = "\(model.temperatureString)°C"
-            self.weatherLabel.text = model.description
-            self.windLabel.text = "\(model.windString) km/h"
-            self.humidityLabel.text = "\(model.humidityString)%"
-        }
-    }
-}
 
 //MARK: - CLLocationManager Delegate Methods
 extension WeatherVC: CLLocationManagerDelegate{
@@ -118,7 +98,6 @@ extension WeatherVC: CLLocationManagerDelegate{
             locationManager.stopUpdatingLocation()
             let lat = location.coordinate.latitude
             let lon = location.coordinate.longitude
-            apiCaller.createURLString(longitude: lon, latitude: lat)
         }
     }
     
