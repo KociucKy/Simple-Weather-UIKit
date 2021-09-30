@@ -35,6 +35,9 @@ class WeatherVC: UIViewController {
     
     //MARK: - Actions
     @IBAction func airPollutionStatusPressed(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Air Pollution Status", message: "It's not good", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func localizeMePressed(_ sender: Any) {
@@ -74,7 +77,9 @@ class WeatherVC: UIViewController {
                     self.weatherImage.image     = UIImage(systemName: self.getWeatherIcon(id: weather.weather[0].id))
                 }
             case .failure(let error):
-                print(error)
+                let alert = UIAlertController(title: "Bad Stuff Happend", message: error.rawValue, preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
@@ -181,7 +186,9 @@ extension WeatherVC: CLLocationManagerDelegate{
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error.localizedDescription)
+        let alert = UIAlertController(title: "Bad Stuff Happend", message: "We couldn't get your current location.", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
 

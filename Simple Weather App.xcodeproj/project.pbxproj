@@ -57,6 +57,14 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		885C935C2705E998000DF8C1 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				88C17F8726F32D98002E421B /* ForecastCell.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
 		88C17F5E26F32BF7002E421B = {
 			isa = PBXGroup;
 			children = (
@@ -110,7 +118,7 @@
 			children = (
 				88C17F7026F32BF7002E421B /* Main.storyboard */,
 				88C17F7526F32BF9002E421B /* LaunchScreen.storyboard */,
-				88C17F8726F32D98002E421B /* ForecastCell.swift */,
+				885C935C2705E998000DF8C1 /* CustomViews */,
 			);
 			path = Views;
 			sourceTree = "<group>";
