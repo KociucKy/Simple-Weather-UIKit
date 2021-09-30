@@ -16,7 +16,10 @@ class WeatherVC: UIViewController {
     
     
     //MARK: - Properties
-    var locationManager = CLLocationManager()
+    var locationManager     = CLLocationManager()
+    var latitude: Double    = 0.0
+    var longitude: Double   = 0.0
+    var pollutionStatus     = ""
     
     
     //MARK: - VC Lifecycle
@@ -35,7 +38,7 @@ class WeatherVC: UIViewController {
     
     //MARK: - Actions
     @IBAction func airPollutionStatusPressed(_ sender: UIButton) {
-        let alert = UIAlertController(title: "Air Pollution Status", message: "It's not good", preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: "Air Pollution Status", message: self.pollutionStatus, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
@@ -62,6 +65,7 @@ class WeatherVC: UIViewController {
     }
     
     
+    //MARK: - Network calls
     func getWeather(city: String){
         NetworkManager.shared.getWeather(for: city) {[weak self] result in
             guard let self = self else { return }
@@ -75,6 +79,9 @@ class WeatherVC: UIViewController {
                     self.windLabel.text         = "\(weather.wind.speed) km/h"
                     self.weatherLabel.text      = weather.weather[0].description.capitalized
                     self.weatherImage.image     = UIImage(systemName: self.getWeatherIcon(id: weather.weather[0].id))
+                    self.latitude               = weather.coord.lat
+                    self.longitude              = weather.coord.lon
+                    self.getAirConditionStatus(lon: self.longitude, lat: self.latitude)
                 }
             case .failure(let error):
                 let alert = UIAlertController(title: "Bad Stuff Happend", message: error.rawValue, preferredStyle: UIAlertController.Style.alert)
@@ -98,10 +105,33 @@ class WeatherVC: UIViewController {
                     self.windLabel.text         = "\(weather.wind.speed) km/h"
                     self.weatherLabel.text      = weather.weather[0].description.capitalized
                     self.weatherImage.image     = UIImage(systemName: self.getWeatherIcon(id: weather.weather[0].id))
+                    self.latitude               = weather.coord.lat
+                    self.longitude              = weather.coord.lon
+                    self.getAirConditionStatus(lon: self.longitude, lat: self.latitude)
                 }
             case .failure(let error):
-                print(error)
+                let alert = UIAlertController(title: "Bad Stuff Happend", message: error.rawValue, preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                #warning("Add UIVC extension with function to alerts")
             }
+        }
+    }
+    
+    
+    func getAirConditionStatus(lon: Double, lat: Double){
+        NetworkManager.shared.getAirConditionStatus(lat: lat, lon: lon) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let airData):
+                self.pollutionStatus = self.getAirStatus(id: airData.list[0].main.aqi)
+            case .failure(let error):
+                let alert = UIAlertController(title: "Bad Stuff Happend", message: error.rawValue, preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+            
         }
     }
     
@@ -128,6 +158,24 @@ class WeatherVC: UIViewController {
             return "cloud"
         default:
             return "cloud.sun"
+        }
+    }
+    
+    
+    func getAirStatus(id: Int) -> String{
+        switch id{
+        case 1:
+            return "The air condition is good."
+        case 2:
+            return "The air condition is fair."
+        case 3:
+            return "The air condition is moderate."
+        case 4:
+            return "The air condition is poor."
+        case 5:
+            return "The air condition is very poor."
+        default:
+            return "We couldn't get the air condition status."
         }
     }
 }
