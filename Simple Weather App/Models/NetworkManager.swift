@@ -1,8 +1,8 @@
 import Foundation
 
 class NetworkManager{
-    public let shared   = NetworkManager()
-    private let baseURL = "http://api.openweathermap.org/data/2.5/weather?q="
+    static let shared   = NetworkManager()
+    private let baseURL = "https://api.openweathermap.org/data/2.5/weather?units=metric"
     
     private init(){}
     
@@ -13,9 +13,10 @@ class NetworkManager{
         return value
     }
     
-    func getWeather(for city: String, completed: @escaping (Result<Weather, CustomErrors>) -> Void){
+    func getWeather(for city: String, completed: @escaping (Result<WeatherData, CustomErrors>) -> Void){
         let apiKey      = valueForAPIKey(named: "API_CLIENT_ID")
-        let endpoint    = baseURL + city + "&appid=\(apiKey)"
+        let endpoint    = baseURL + "&q=\(city)" + "&appid=\(apiKey)"
+        print(endpoint)
         
         guard let url = URL(string: endpoint) else {
             completed(.failure(.unableToComplete))
@@ -40,7 +41,7 @@ class NetworkManager{
             
             do{
                 let decoder = JSONDecoder()
-                let weather = try decoder.decode(Weather.self, from: data)
+                let weather = try decoder.decode(WeatherData.self, from: data)
                 completed(.success(weather))
             }catch{
                 completed(.failure(.invalidData))
