@@ -23,9 +23,9 @@ class WeatherVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         localizationTextField.delegate = self
-//        locationManager.delegate = self
-//        locationManager.requestWhenInUseAuthorization()
-//        locationManager.requestLocation()
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
         
         
         imageShadow(weatherImage)
@@ -67,7 +67,28 @@ class WeatherVC: UIViewController {
             case .success(let weather):
                 DispatchQueue.main.async {
                     self.cityLabel.text         = weather.name
-                    self.temperatureLabel.text  = "\(weather.main.temp)°C"
+                    self.temperatureLabel.text  = String(format: "%.1f", weather.main.temp) + " °C"
+                    self.humidityLabel.text     = "\(weather.main.humidity)%"
+                    self.windLabel.text         = "\(weather.wind.speed) km/h"
+                    self.weatherLabel.text      = weather.weather[0].description.capitalized
+                    self.weatherImage.image     = UIImage(systemName: self.getWeatherIcon(id: weather.weather[0].id))
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    
+    func getWeather(lat: Double, lon: Double){
+        NetworkManager.shared.getWeather(lat: lat, lon: lon) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let weather):
+                DispatchQueue.main.async {
+                    self.cityLabel.text         = weather.name
+                    self.temperatureLabel.text  = String(format: "%.1f", weather.main.temp) + " °C"
                     self.humidityLabel.text     = "\(weather.main.humidity)%"
                     self.windLabel.text         = "\(weather.wind.speed) km/h"
                     self.weatherLabel.text      = weather.weather[0].description.capitalized
@@ -155,6 +176,7 @@ extension WeatherVC: CLLocationManagerDelegate{
             locationManager.stopUpdatingLocation()
             let lat = location.coordinate.latitude
             let lon = location.coordinate.longitude
+            getWeather(lat: lat, lon: lon)
         }
     }
     
