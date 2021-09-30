@@ -12,6 +12,7 @@
 		883E22B42704EB9E00FF53CD /* CustomErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883E22B32704EB9E00FF53CD /* CustomErrors.swift */; };
 		883E22B62704EC8D00FF53CD /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883E22B52704EC8D00FF53CD /* WeatherData.swift */; };
 		885C935E2705F33C000DF8C1 /* AirPollutionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C935D2705F33C000DF8C1 /* AirPollutionData.swift */; };
+		885C93602705FD26000DF8C1 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C935F2705FD26000DF8C1 /* UIViewController+Ext.swift */; };
 		88C17F6B26F32BF7002E421B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C17F6A26F32BF7002E421B /* AppDelegate.swift */; };
 		88C17F6D26F32BF7002E421B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C17F6C26F32BF7002E421B /* SceneDelegate.swift */; };
 		88C17F6F26F32BF7002E421B /* WeatherVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C17F6E26F32BF7002E421B /* WeatherVC.swift */; };
@@ -28,6 +29,7 @@
 		883E22B32704EB9E00FF53CD /* CustomErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomErrors.swift; sourceTree = "<group>"; };
 		883E22B52704EC8D00FF53CD /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		885C935D2705F33C000DF8C1 /* AirPollutionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirPollutionData.swift; sourceTree = "<group>"; };
+		885C935F2705FD26000DF8C1 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		88C17F6726F32BF7002E421B /* Simple Weather App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Simple Weather App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		88C17F6A26F32BF7002E421B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88C17F6C26F32BF7002E421B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				883E22B32704EB9E00FF53CD /* CustomErrors.swift */,
+				885C935F2705FD26000DF8C1 /* UIViewController+Ext.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 				885C935E2705F33C000DF8C1 /* AirPollutionData.swift in Sources */,
 				88C17F6D26F32BF7002E421B /* SceneDelegate.swift in Sources */,
 				883E22B62704EC8D00FF53CD /* WeatherData.swift in Sources */,
+				885C93602705FD26000DF8C1 /* UIViewController+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

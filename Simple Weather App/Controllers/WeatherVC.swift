@@ -30,7 +30,6 @@ class WeatherVC: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
         
-        
         imageShadow(weatherImage)
         buttonShadow(airPollutionButton)
     }
@@ -38,9 +37,7 @@ class WeatherVC: UIViewController {
     
     //MARK: - Actions
     @IBAction func airPollutionStatusPressed(_ sender: UIButton) {
-        let alert = UIAlertController(title: "Air Pollution Status", message: self.pollutionStatus, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        self.displayAnAlert(title: "Air Pollution Status", message: self.pollutionStatus, action: "Ok")
     }
     
     @IBAction func localizeMePressed(_ sender: Any) {
@@ -84,9 +81,7 @@ class WeatherVC: UIViewController {
                     self.getAirConditionStatus(lon: self.longitude, lat: self.latitude)
                 }
             case .failure(let error):
-                let alert = UIAlertController(title: "Bad Stuff Happend", message: error.rawValue, preferredStyle: UIAlertController.Style.alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+                self.displayAnAlert(title: "Bad Stuff Happend", message: error.rawValue, action: "Ok")
             }
         }
     }
@@ -110,10 +105,7 @@ class WeatherVC: UIViewController {
                     self.getAirConditionStatus(lon: self.longitude, lat: self.latitude)
                 }
             case .failure(let error):
-                let alert = UIAlertController(title: "Bad Stuff Happend", message: error.rawValue, preferredStyle: UIAlertController.Style.alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-                #warning("Add UIVC extension with function to alerts")
+                self.displayAnAlert(title: "Bad Stuff Happend", message: error.rawValue, action: "Ok")
             }
         }
     }
@@ -127,9 +119,7 @@ class WeatherVC: UIViewController {
             case .success(let airData):
                 self.pollutionStatus = self.getAirStatus(id: airData.list[0].main.aqi)
             case .failure(let error):
-                let alert = UIAlertController(title: "Bad Stuff Happend", message: error.rawValue, preferredStyle: UIAlertController.Style.alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+                self.displayAnAlert(title: "Bad Stuff Happend", message: error.rawValue, action: "Ok")
             }
             
         }
@@ -234,9 +224,7 @@ extension WeatherVC: CLLocationManagerDelegate{
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        let alert = UIAlertController(title: "Bad Stuff Happend", message: "We couldn't get your current location.", preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        self.displayAnAlert(title: "Bad Stuff Happend", message: "We couldn't get your current location.", action: "Ok")
     }
 }
 
