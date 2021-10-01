@@ -68,4 +68,15 @@ class ForecastCell: UICollectionViewCell {
             
         ])
     }
+    
+    
+    func set(list: [ForecastList], index: Int){
+        let splittedDate        = list[index].dt_txt.split(separator: " ")
+        let date                = String(splittedDate[0])
+        let time                = String(splittedDate[1])
+        
+        dateLabel.text          = date
+        timeLabel.text          = time
+        temperatureLabel.text   = String(format: "%.1f", list[index].main.temp) + " °C"
+    }
 }

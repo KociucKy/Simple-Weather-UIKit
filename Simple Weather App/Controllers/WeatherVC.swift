@@ -16,11 +16,11 @@ class WeatherVC: UIViewController {
     
     
     //MARK: - Properties
-    var locationManager     = CLLocationManager()
-    var latitude: Double    = 0.0
-    var longitude: Double   = 0.0
-    var pollutionStatus     = ""
-    
+    var locationManager             = CLLocationManager()
+    var latitude: Double            = 0.0
+    var longitude: Double           = 0.0
+    var pollutionStatus             = ""
+    var forecastList: [ForecastList] = []
     
     //MARK: - VC Lifecycle
     override func viewDidLoad() {
@@ -60,7 +60,7 @@ class WeatherVC: UIViewController {
         let layout                                  = UICollectionViewFlowLayout()
         layout.scrollDirection                      = .horizontal
         forecastCollectionView.collectionViewLayout = layout
-        forecastCollectionView.backgroundColor      = UIColor(named: "SecondaryColor")
+        forecastCollectionView.backgroundColor      = .clear
         forecastCollectionView.register(ForecastCell.self, forCellWithReuseIdentifier: ForecastCell.reuseID)
     }
     
@@ -129,6 +129,23 @@ class WeatherVC: UIViewController {
     }
     
     
+    func getForecast(city: String){
+        NetworkManager.shared.getForecastWeather(for: city) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result{
+            case .success(let forecastWeather):
+                self.forecastList = []
+                let list = forecastWeather.list
+                self.forecastList.append(contentsOf: list)
+                DispatchQueue.main.async { self.forecastCollectionView.reloadData() }
+            case .failure(let error):
+                DispatchQueue.main.async { self.displayAnAlert(title: "Bad Stuff Happend", message: error.rawValue, action: "Ok") }
+            }
+        }
+    }
+    
+    
     func getWeatherIcon(id: Int) -> String{
         switch id {
         case 200...232:
@@ -177,16 +194,14 @@ class WeatherVC: UIViewController {
 //MARK: - UICollectionView DataSource and Delegate Methods
 extension WeatherVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 15
+        return forecastList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = forecastCollectionView.dequeueReusableCell(withReuseIdentifier: ForecastCell.reuseID, for: indexPath) as! ForecastCell
-        cell.backgroundColor        = UIColor(named: "SecondaryColor")
-        cell.dateLabel.text         = "21 Jan 2021"
-        cell.timeLabel.text         = "01:00 AM"
+        cell.backgroundColor        = .clear
         cell.weatherImage.image     = UIImage(systemName: "sun.max")
-        cell.temperatureLabel.text  = "21 °C"
+        cell.set(list: forecastList, index: indexPath.row)
         return cell
     }
     
@@ -220,6 +235,7 @@ extension WeatherVC: UITextFieldDelegate{
         //making sure that names like "New York" do not return an error
         if let city = localizationTextField.text?.replacingOccurrences(of: " ", with: "%20"){
             getWeather(city: city)
+            getForecast(city: city)
         }
         localizationTextField.text = ""
     }

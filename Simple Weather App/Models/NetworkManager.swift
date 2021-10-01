@@ -1,9 +1,10 @@
 import Foundation
 
 class NetworkManager{
-    static let shared   = NetworkManager()
-    private let baseURL = "https://api.openweathermap.org/data/2.5/weather?units=metric"
-    private let airURL  = "https://api.openweathermap.org/data/2.5/air_pollution?"
+    static let shared       = NetworkManager()
+    private let baseURL     = "https://api.openweathermap.org/data/2.5/weather?units=metric"
+    private let airURL      = "https://api.openweathermap.org/data/2.5/air_pollution?"
+    private let forecastURL = "https://api.openweathermap.org/data/2.5/forecast?units=metric"
     
     private init(){}
     
@@ -127,7 +128,41 @@ class NetworkManager{
     }
     
     
-    func getForecastWeather(){
+    func getForecastWeather(for city: String, completed: @escaping(Result<ForecastData, CustomErrors>) -> Void){
+        let apiKey      = valueForAPIKey(named: "API_CLIENT_ID")
+        let endpoint    = forecastURL + "&q=\(city)" + "&appid=\(apiKey)"
         
+        guard let url = URL(string: endpoint) else{
+            completed(.failure(.unableToComplete))
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let _ = error {
+                completed(.failure(.unableToComplete))
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completed(.failure(.invalidResponse))
+                return
+            }
+            
+            guard let data = data else {
+                completed(.failure(.invalidData))
+                return
+            }
+            
+            do{
+                let decoder = JSONDecoder()
+                let forecastWeather = try decoder.decode(ForecastData.self, from: data)
+                completed(.success(forecastWeather))
+            }catch{
+                completed(.failure(.invalidData))
+            }
+
+            
+        }
+        task.resume()
     }
 }
