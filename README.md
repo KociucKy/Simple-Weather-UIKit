@@ -23,8 +23,7 @@ This is my attempt of creating basic weather app. I've done this using UIKit and
 
 
 ### Screenshots
-<img src="ReadMe/MainScreen-Light.png" width="421" height="784.5"><img src="ReadMe/MainScreen-Dark.png" width="421" height="794.5">
-<img src="ReadMe/SearchScreen-Dark.png" width="421" height="794.5">
+<img src="Image/Screenshots.png">
 <br>
 <br>
 <br>
