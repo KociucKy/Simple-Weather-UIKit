@@ -146,6 +146,24 @@ class WeatherVC: UIViewController {
     }
     
     
+    func getForecast(lat: Double, lon: Double){
+        NetworkManager.shared.getForecastWeather(lat: lat, lon: lon) { [weak self] result in
+            guard let self = self else { return }
+            
+            
+            switch result{
+            case .success(let forecastWeather):
+                self.forecastList = []
+                let list = forecastWeather.list
+                self.forecastList.append(contentsOf: list)
+                DispatchQueue.main.async { self.forecastCollectionView.reloadData() }
+            case .failure(let error):
+                DispatchQueue.main.async { self.displayAnAlert(title: "Bad Stuff Happend", message: error.rawValue, action: "Ok") }
+            }
+        }
+    }
+    
+    
     func getWeatherIcon(id: Int) -> String{
         switch id {
         case 200...232:
@@ -250,6 +268,7 @@ extension WeatherVC: CLLocationManagerDelegate{
             let lat = location.coordinate.latitude
             let lon = location.coordinate.longitude
             getWeather(lat: lat, lon: lon)
+            getForecast(lat: lat, lon: lon)
         }
     }
     
