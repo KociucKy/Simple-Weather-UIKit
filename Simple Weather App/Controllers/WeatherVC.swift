@@ -200,7 +200,7 @@ extension WeatherVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = forecastCollectionView.dequeueReusableCell(withReuseIdentifier: ForecastCell.reuseID, for: indexPath) as! ForecastCell
         cell.backgroundColor        = .clear
-        cell.weatherImage.image     = UIImage(systemName: "sun.max")
+        cell.weatherImage.image     = UIImage(systemName: getWeatherIcon(id: self.forecastList[indexPath.row].weather[0].id))
         cell.set(list: forecastList, index: indexPath.row)
         return cell
     }
