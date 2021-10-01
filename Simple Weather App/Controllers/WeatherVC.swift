@@ -174,11 +174,12 @@ class WeatherVC: UIViewController {
 //MARK: - UICollectionView Data Source Methods
 extension WeatherVC: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7
+        return 15
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        let cell = forecastCollectionView.dequeueReusableCell(withReuseIdentifier: ForecastCell.reuseID, for: indexPath) as! ForecastCell
+        return cell
     }
 }
 
@@ -204,7 +205,8 @@ extension WeatherVC: UITextFieldDelegate{
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if let city = localizationTextField.text{
+        //making sure that names like "New York" do not return an error
+        if let city = localizationTextField.text?.replacingOccurrences(of: " ", with: "%20"){
             getWeather(city: city)
         }
         localizationTextField.text = ""
