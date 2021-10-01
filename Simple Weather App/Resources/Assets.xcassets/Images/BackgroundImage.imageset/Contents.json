@@ -1,16 +1,6 @@
 {
   "images" : [
     {
-      "filename" : "background.svg",
-      "idiom" : "universal"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "dark"
-        }
-      ],
       "filename" : "background-2.svg",
       "idiom" : "universal"
     }

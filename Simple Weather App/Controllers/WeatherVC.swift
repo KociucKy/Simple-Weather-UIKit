@@ -25,13 +25,8 @@ class WeatherVC: UIViewController {
     //MARK: - VC Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        localizationTextField.delegate = self
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.requestLocation()
-        
-        imageShadow(weatherImage)
-        buttonShadow(airPollutionButton)
+        configureVC()
+        configureCollectionView()
     }
     
     
@@ -46,19 +41,27 @@ class WeatherVC: UIViewController {
     
     
     //MARK: - Methods
-    func imageShadow(_ image: UIImageView){
-        image.layer.shadowColor = UIColor(named: "ShadowColor")?.cgColor
-        image.layer.shadowOpacity = 1
-        image.layer.shadowOffset = CGSize.init(width: 2, height: 2)
-        image.layer.shadowRadius = 5
+    func configureVC(){
+        localizationTextField.delegate      = self
+        locationManager.delegate            = self
+        forecastCollectionView.delegate     = self
+        forecastCollectionView.dataSource   = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
+        
+        
+        imageShadow(weatherImage)
+        buttonShadow(airPollutionButton)
+        
     }
     
     
-    func buttonShadow(_ button: UIButton){
-        button.layer.shadowColor = UIColor(named: "ShadowColor")?.cgColor
-        button.layer.shadowOpacity = 1
-        button.layer.shadowOffset = CGSize.init(width: 2, height: 2)
-        button.layer.shadowRadius = 5
+    func configureCollectionView(){
+        let layout                                  = UICollectionViewFlowLayout()
+        layout.scrollDirection                      = .horizontal
+        forecastCollectionView.collectionViewLayout = layout
+        forecastCollectionView.backgroundColor      = UIColor(named: "SecondaryColor")
+        forecastCollectionView.register(ForecastCell.self, forCellWithReuseIdentifier: ForecastCell.reuseID)
     }
     
     
@@ -171,15 +174,24 @@ class WeatherVC: UIViewController {
 }
 
 
-//MARK: - UICollectionView Data Source Methods
-extension WeatherVC: UICollectionViewDataSource{
+//MARK: - UICollectionView DataSource and Delegate Methods
+extension WeatherVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 15
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = forecastCollectionView.dequeueReusableCell(withReuseIdentifier: ForecastCell.reuseID, for: indexPath) as! ForecastCell
+        cell.backgroundColor        = UIColor(named: "SecondaryColor")
+        cell.dateLabel.text         = "21 Jan 2021"
+        cell.timeLabel.text         = "01:00 AM"
+        cell.weatherImage.image     = UIImage(systemName: "sun.max")
+        cell.temperatureLabel.text  = "21 °C"
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: forecastCollectionView.frame.width / 2.5, height: forecastCollectionView.frame.height)
     }
 }
 

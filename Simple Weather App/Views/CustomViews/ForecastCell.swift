@@ -25,14 +25,18 @@ class ForecastCell: UICollectionViewCell {
     
     //MARK: - Methods
     func configure(){
-        //Temporary dummy data
-        dateLabel.text          = "21 Jan 2021"
-        timeLabel.text          = "01:00 AM"
-        weatherImage.image      = UIImage(systemName: "sun.max")
-        temperatureLabel.text   = "21 °C"
+        dateLabel.textColor                 = UIColor(named: "PrimaryColor")
+        timeLabel.textColor                 = UIColor(named: "PrimaryColor")
+        temperatureLabel.textColor          = UIColor(named: "PrimaryColor")
+        dateLabel.textAlignment             = .center
+        timeLabel.textAlignment             = .center
+        temperatureLabel.textAlignment      = .center
+        weatherImage.tintColor    = UIColor(named: "PrimaryColor")
+        weatherImage.contentMode        = .scaleAspectFit
+        container.translatesAutoresizingMaskIntoConstraints = false
         
         let elements = [dateLabel, timeLabel, weatherImage, temperatureLabel]
-        self.addSubview(container)
+        contentView.addSubview(container)
         
         for element in elements {
             container.addSubview(element)
@@ -45,10 +49,10 @@ class ForecastCell: UICollectionViewCell {
         }
         
         NSLayoutConstraint.activate([
-            container.topAnchor.constraint(equalTo: self.topAnchor),
-            container.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            container.heightAnchor.constraint(equalTo: self.heightAnchor),
-            container.widthAnchor.constraint(equalTo: self.widthAnchor),
+            container.topAnchor.constraint(equalTo: contentView.topAnchor),
+            container.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            container.heightAnchor.constraint(equalTo: contentView.heightAnchor),
+            container.widthAnchor.constraint(equalTo: contentView.widthAnchor),
             
             dateLabel.topAnchor.constraint(equalTo: container.topAnchor, constant: 10),
             dateLabel.heightAnchor.constraint(equalToConstant: 12),

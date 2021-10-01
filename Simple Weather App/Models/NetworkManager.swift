@@ -125,4 +125,9 @@ class NetworkManager{
         }
         task.resume()
     }
+    
+    
+    func getForecastWeather(){
+        
+    }
 }

@@ -6,4 +6,19 @@ extension UIViewController{
         alert.addAction(UIAlertAction(title: action, style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    func imageShadow(_ image: UIImageView){
+        image.layer.shadowColor = UIColor(named: "ShadowColor")?.cgColor
+        image.layer.shadowOpacity = 1
+        image.layer.shadowOffset = CGSize.init(width: 2, height: 2)
+        image.layer.shadowRadius = 5
+    }
+    
+    
+    func buttonShadow(_ button: UIButton){
+        button.layer.shadowColor = UIColor(named: "ShadowColor")?.cgColor
+        button.layer.shadowOpacity = 1
+        button.layer.shadowOffset = CGSize.init(width: 2, height: 2)
+        button.layer.shadowRadius = 5
+    }
 }
