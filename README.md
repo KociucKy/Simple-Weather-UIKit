@@ -17,6 +17,7 @@ This is my attempt of creating basic weather app. I've done this using UIKit and
 2. Clone this repo to Xcode.
 3. Choose the Simulator.
 4. Hit Run button.
+5. MAKE SURE THAT YOUR SIMULATOR HAVE TURNED ON LOCALIZATION, OTHERWISE YOU'LL GET AN ERROR
 <br>
 <br>
 <br>

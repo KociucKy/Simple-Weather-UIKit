@@ -56,6 +56,7 @@ class NetworkManager{
     
     
     func getWeather(lat: Double, lon: Double, completed: @escaping (Result<WeatherData, CustomErrors>) -> Void){
+        //Replace apiKey value with your OpenWeatherMapAPI Key
         let apiKey      = valueForAPIKey(named: "API_CLIENT_ID")
         let endpoint    = baseURL + "&lat=\(lat)" + "&lon=\(lon)" + "&appid=\(apiKey)"
         
@@ -94,6 +95,7 @@ class NetworkManager{
     
     
     func getAirConditionStatus(lat: Double, lon: Double, completed: @escaping (Result<AirPollutionData, CustomErrors>) -> Void){
+        //Replace apiKey value with your OpenWeatherMapAPI Key
         let apiKey      = valueForAPIKey(named: "API_CLIENT_ID")
         let endpoint    = airURL + "&lat=\(lat)" + "&lon=\(lon)" + "&appid=\(apiKey)"
         
@@ -131,6 +133,7 @@ class NetworkManager{
     
     
     func getForecastWeather(for city: String, completed: @escaping(Result<ForecastData, CustomErrors>) -> Void){
+        //Replace apiKey value with your OpenWeatherMapAPI Key
         let apiKey      = valueForAPIKey(named: "API_CLIENT_ID")
         let endpoint    = forecastURL + "&q=\(city)" + "&appid=\(apiKey)"
         
@@ -168,6 +171,7 @@ class NetworkManager{
     
     
     func getForecastWeather(lat: Double, lon: Double, completed: @escaping(Result<ForecastData, CustomErrors>) -> Void){
+        //Replace apiKey value with your OpenWeatherMapAPI Key
         let apiKey      = valueForAPIKey(named: "API_CLIENT_ID")
         let endpoint    = forecastURL + "&lat=\(lat)" + "&lon=\(lon)" + "&appid=\(apiKey)"
         

@@ -27,6 +27,7 @@ class WeatherVC: UIViewController {
         super.viewDidLoad()
         configureVC()
         configureCollectionView()
+        self.initializeHideKeyboard()
     }
     
     
@@ -52,7 +53,6 @@ class WeatherVC: UIViewController {
         
         imageShadow(weatherImage)
         buttonShadow(airPollutionButton)
-        
     }
     
     
@@ -150,7 +150,6 @@ class WeatherVC: UIViewController {
         NetworkManager.shared.getForecastWeather(lat: lat, lon: lon) { [weak self] result in
             guard let self = self else { return }
             
-            
             switch result{
             case .success(let forecastWeather):
                 self.forecastList = []
@@ -232,7 +231,7 @@ extension WeatherVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
 //MARK: - UITextField Delegate Methods
 extension WeatherVC: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        localizationTextField.endEditing(true)
+        localizationTextField.resignFirstResponder()
         return true
     }
     
@@ -240,22 +239,16 @@ extension WeatherVC: UITextFieldDelegate{
         return true
     }
     
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        if textField.text != ""{
-            return true
-        }else{
-            textField.placeholder = "Type something"
-            return false
-        }
-    }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        //making sure that names like "New York" do not return an error
-        if let city = localizationTextField.text?.replacingOccurrences(of: " ", with: "%20"){
-            getWeather(city: city)
-            getForecast(city: city)
+        if localizationTextField.text != ""{
+            //making sure that names like "New York" do not return an error
+            if let city = localizationTextField.text?.replacingOccurrences(of: " ", with: "%20"){
+                getWeather(city: city)
+                getForecast(city: city)
+            }
+            localizationTextField.text = ""
         }
-        localizationTextField.text = ""
     }
 }
 
